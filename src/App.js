@@ -9,7 +9,7 @@ import axios from 'axios';
 function App() {
  // const {posts, loading} = useSelector((state) => ({...state.data}));
  // const dispatch = useDispatch();
- 
+
  const [myData, setMydata] = useState([])
  const [search, setSearch] = useState("")
 
@@ -51,7 +51,7 @@ function App() {
         }).map((item) => {
         // console.log(item,"single")
         return(
-            <div className="card" style={{width:"355px",height:"500px", float:"left"}} >
+            <div className="card" style={{width:"355px",height:"500px", float:"left"}} key={item.trackId}>
             <img src={item.artworkUrl100} className="card-img-top" alt="" height="250px" />
             <div className="card-body">
               <h5 className="card-title">{item.artistName}</h5>
