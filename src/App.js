@@ -37,6 +37,8 @@ function App() {
       <header >
         <h2>Music Website</h2>
         <br />
+        <p>Able to search the music by Artistname and PrimaryGenreName </p>
+        <br />
         <div>
           <input type="search"
             placeholder="Search by Artist Name" 
