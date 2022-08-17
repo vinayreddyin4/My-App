@@ -1,5 +1,7 @@
 import axios from 'axios';
 import * as types from './ActionType';
+
+
 const fetchPostStart = () => ({
     type: types.FETCH_POST_START,
 });
