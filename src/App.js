@@ -12,6 +12,8 @@ function App() {
 
  const [myData, setMydata] = useState([])
  const [search, setSearch] = useState("")
+ const [showCount, setShowCount] =useState(10)
+
 
  useEffect(() => {
   axios.get('https://itunes.apple.com/search?term=jack+johnson', {
@@ -24,6 +26,9 @@ function App() {
    .then(data1 => {
      console.log(data1,"i")
      setMydata(data1)
+   })
+   .catch(err => {
+     console.log(err)
    })
  }, [])
 
@@ -38,6 +43,7 @@ function App() {
             onChange={event => setSearch(event.target.value)}
           />
         </div>
+        <br/>
         <br />
         {console.log(myData.results,"my dddd")}
         {myData.results && myData.results.filter(val => {
@@ -48,22 +54,25 @@ function App() {
           } else if (val.primaryGenreName.toLowerCase().includes(search.toLocaleLowerCase())){
             return val
           }
-        }).map((item) => {
-        // console.log(item,"single")
-        return(
+        }).map((item, index) => {
+        return( index + 1 <= showCount ?
             <div className="card" style={{width:"355px",height:"500px", float:"left"}} key={item.trackId}>
-            <img src={item.artworkUrl100} className="card-img-top" alt="" height="250px" />
-            <div className="card-body">
-              <h5 className="card-title">{item.artistName}</h5>
-              <p className="card-text">{item.primaryGenreName}</p>
-              <a href={item.artistViewUrl} className="btn btn-secondary">Play Music</a>
-              <br></br>
-            </div>
-          </div>
+              <img src={item.artworkUrl100} className="card-img-top" alt="" height="250px" />
+              <div className="card-body">
+                <h5 className="card-title">{item.artistName}</h5>
+                <p className="card-text">{item.primaryGenreName}</p>
+                <a href={item.artistViewUrl} className="btn btn-secondary">Play Music</a>
+                <br/>
+              </div>
+            </div> : undefined
           )
         })
       }
+      <br/>
       </header>
+      {myData.results ? 
+      <button type="button" className="btn btn-success" 
+      onClick={() => setShowCount(showCount + 10)} >Load more Albums</button> : undefined}
    </div>
   )
 }
